@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+  table, th, td, tr {
+    border: 1px solid white;
+    border-collapse: collapse;
+  }
+/* Add a black background color to the top navigation */
+.topnav {
+  background-color: #333;
+  overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+</style>
+
+{% comment %} <div class="container">
+  <div class="row">
+    <nav class="navbar navbar-dark bg-dark">
+      <div class="container-fluid">
+        <div class="col">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            Date
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+</div> {% endcomment %}
+{% comment %} 
+  <div class="topnav">
+    <a class="active" href="#home">Home</a>
+    <a href="#news">News</a>
+    <a href="#contact">Contact</a>
+    <a href="#about">About</a>
+  </div>{% endcomment %}
+<div class="container-fluid"> 
+
+  <div class="row pt-5 pb-5">
+    <center>
+      <div class="col-md-4">
+        <a class="text-white" style="font-size: 1rem;">Zoho Org</a><br>
+        <a class="text-white" style="font-size: 1.5rem;">FIFO Cost Lot Tracking </a><br>
+        <a class="text-white" style="font-size: 0.8rem;">From 01 Jan 2016 To 31 Dec 2016</a><br>
+      </div>
+    </center>   
+  </div> 
+ 
+
+<div style="overflow-x: auto; overflow-x: hidden;">
+  <div class="row pt-2">
+    <div class="col-sm-10 col-md-11 col-lg-12">
+      <table class="table text-white">
+        <thead>
+          <tr>
+            <th colspan="6" style="text-align: center;">PRODUCT IN</th>
+            <th colspan="4" style="text-align: center;">PRODUCT OUT</th> 
+          </tr>
+          <tr>
+            <th>DATE</th>
+            <th>TRANSACTIONS</th>
+            <th>RECEIVED FROM</th>
+            <th>ITEM NAME</th>
+            <th>QUANTITY</th>
+            <th>TOTAL</th>
+
+            <th>DATE</th>
+            <th>TRANSACTIONS</th>
+            <th>DISPERSED TO</th>
+            <th>QTY DISPERSED</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+
+            <td ></td>
+            <td></td>
+            <td></td>
+            <td></td> 
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+
+            <td ></td>
+            <td></td>
+            <td></td>
+            <td></td> 
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>  
+<p>**Amount is displayed in your base currency INR</p>
+
+
+{% endblock content %}
