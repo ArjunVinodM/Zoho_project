@@ -7018,3 +7018,9 @@ def fifo_cost(request):
 
 def product_sales(request):
     return render(request, 'product_sales.html')
+
+def product_customize(request):
+    return render(request, 'customize_product.html')
+
+def customize_fifo(request):
+    return render(request, 'customize_fifo.html')

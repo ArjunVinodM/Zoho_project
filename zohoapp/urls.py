@@ -338,6 +338,8 @@ urlpatterns = [
     path('report_page', views.report, name='report_page'),
     path('fifo_cost', views.fifo_cost, name='fifo_cost'),
     path('product_sales_report', views.product_sales, name='product_sales_report'),
+    path('product_customize', views.product_customize, name='product_customize'),
+    path('customize_fifo', views.customize_fifo, name='customize_fifo'),
     
     re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
     

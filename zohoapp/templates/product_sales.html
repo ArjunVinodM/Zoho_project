@@ -3,6 +3,172 @@
 
 {% block content %}
 
-<h1>hi</h1>
+<style>
+  table, th, td, tr {
+    border: 1px solid white;
+    border-collapse: collapse;
+  }
+
+  .topnav {
+    background-color: #333;
+  }
+  
+  .a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 14px;
+  }
+
+  .customize {
+    float: left;
+    text-align: center;
+    padding: 20px 20px;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  
+  .topnav-right {
+    float: right;
+  }
+
+  .dropdown, .nav-item {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 4px 4px;
+    text-decoration: none;
+    font-size: 14px;
+  }
+
+
+</style>
+
+
+<ul class="nav nav-pills">
+  <li class="nav-item">
+    <a href="#home" class="a">
+      <i class="fa fa-bars" style="font-size:25px;"></i>
+    </a>
+  </li>
+
+  <li>
+    <a href="#select" class="a">
+      <div>
+        <select id="demo_overview_minimal" data-role="select-dropdown" data-profile="minimal" style="height: 4vh; width:12vw;">
+          <option value="">Today</option>
+          <option value="">This Week</option>
+          <option value="">This Month</option>
+          <option value="">This Quarter</option>
+          <option value="">This Year</option>
+          <option value="">Yesterday</option>
+          <option value="">Previous Week</option>
+          <option value="">Previous Month</option>
+          <option value="">Previous Quarter</option>
+          <option value="">Previous Year</option>
+          <option value="">Custom</option>
+        </select>
+      </div>
+    </a>
+  </li>
+
+  <a href="{% url 'product_customize' %}"  class="customize me-auto">
+    <i class="fa fa-gear" style="font-size:18px;"></i>&nbsp&nbsp&nbsp
+    Customize report
+  </a>
+
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" style="background: white; color: black;"><i class="fa fa-print"></i></a>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="#" style="font-size:10px;">Print Preference</a></li>
+    </ul>
+  </li>
+
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" style="background: white; color: black;">Export As</a>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="#" style="font-size:10px;">PDF</a></li>
+      <li><a class="dropdown-item" href="#" style="font-size:10px;">XLS (Microsoft Excel 1997-2004 Compatible)</a></li>
+    </ul>
+  </li>
+
+  <li class="nav-item" style="height:4vh; width:4vw;">
+    <button type="button" onclick="history.go(-1);" style="height:5vh; width:2.5vw;">&times;</button>
+  </li>
+</ul>
+
+
+
+
+
+
+
+<div class="container-fluid"> 
+  <div class="row pt-5 pb-5">
+    <center>
+      <div class="col-md-4">
+        <a class="text-white" style="font-size: 1rem;">Zoho Org</a><br>
+        <a class="text-white" style="font-size: 1.5rem;">Product Sales Report </a><br>
+        <a class="text-white" style="font-size: 0.8rem;">From 01 Apr 2023 To 31 Mar 2023</a><br>
+      </div>
+    </center>   
+  </div> 
+
+  <div style="overflow-x: auto; overflow-x: hidden;">
+    <div class="row pt-2">
+      <div class="col-sm-10 col-md-11 col-lg-12">
+        <table class="table text-white">
+          <thead>
+            <tr>
+              <th>ITEM NAME</th>
+              <th>MARGIN</th>
+              <th>QTY SOLD</th>
+              <th>SALES PRICE</th>
+              <th>SALES WITH TAX</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td> 
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td> 
+              <td></td> 
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td> 
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td> 
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td> 
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <p>**Amount is displayed in your base currency INR</p>
+</div>  
 
 {% endblock content %}
