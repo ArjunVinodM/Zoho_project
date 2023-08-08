@@ -341,6 +341,10 @@ urlpatterns = [
     path('product_customize', views.product_customize, name='product_customize'),
     path('customize_fifo', views.customize_fifo, name='customize_fifo'),
     
+    path('url1', views.product_customize, name='url1'),
+    path('url2', views.show_customize_product, name='url2'),
+
+    
     re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
     
     

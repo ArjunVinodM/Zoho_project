@@ -7019,8 +7019,25 @@ def fifo_cost(request):
 def product_sales(request):
     return render(request, 'product_sales.html')
 
+def show_customize_product(request):
+    general = "url1"
+    show = "url2"
+    
+    context = {
+        'url1' : general,
+        'url2' : show,
+    }
+    return render(request, 'customize_show_product.html', context)
+
 def product_customize(request):
-    return render(request, 'customize_product.html')
+    general = "url1"
+    show = "url2"
+    
+    context = {
+        'url1' : general,
+        'url2' : show,
+    }
+    return render(request, 'customize_product.html', context)
 
 def customize_fifo(request):
     return render(request, 'customize_fifo.html')
