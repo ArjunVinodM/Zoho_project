@@ -25,7 +25,7 @@
   .customize {
     float: left;
     text-align: center;
-    padding: 20px 20px;
+    padding: 20px 330px;
     text-decoration: none;
     font-size: 14px;
   }
@@ -43,6 +43,21 @@
     font-size: 14px;
   }
 
+  .dropdown-item:hover{
+    color: white;
+  }
+
+  .b {
+    float: left;
+    color: #f2f2f2;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 14px;
+  }
+
+  .daterangepicker{
+    color: black;
+  }
 
 </style>
 
@@ -55,23 +70,12 @@
   </li>
 
   <li>
-    <a href="#select" class="a">
-      <div>
-        <select id="demo_overview_minimal" data-role="select-dropdown" data-profile="minimal" style="height: 4vh; width:12vw;">
-          <option value="">Today</option>
-          <option value="">This Week</option>
-          <option value="">This Month</option>
-          <option value="">This Quarter</option>
-          <option value="">This Year</option>
-          <option value="">Yesterday</option>
-          <option value="">Previous Week</option>
-          <option value="">Previous Month</option>
-          <option value="">Previous Quarter</option>
-          <option value="">Previous Year</option>
-          <option value="">Custom</option>
-        </select>
+    <div class="b text-black">
+      <div id="reportrange" style="background: white; color: black; cursor: pointer; padding: 5px 10px; border: 1px solid black; height: 4vh; width: 19vw;">
+        <i class="fa fa-calendar"></i>&nbsp;
+        <span></span> <i class="fa fa-caret-down"></i>
       </div>
-    </a>
+    </div>
   </li>
 
   <a href="{% url 'product_customize' %}"  class="customize me-auto">
@@ -82,7 +86,7 @@
   <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" style="background: white; color: black;"><i class="fa fa-print"></i></a>
     <ul class="dropdown-menu">
-      <li><a class="dropdown-item" href="#" style="font-size:10px;">Print Preference</a></li>
+      <li><a class="dropdown-item" href="#" style="font-size:10px;" onclick="printpage()">Print Preference</a></li>
     </ul>
   </li>
 
@@ -170,5 +174,39 @@
   </div>
   <p>**Amount is displayed in your base currency INR</p>
 </div>  
+
+<script>
+  $(function() {
+  
+    var start = moment().subtract(29, 'days');
+    var end = moment();
+  
+    function cb(start, end) {
+        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+    }
+  
+    $('#reportrange').daterangepicker({
+        startDate: start,
+        endDate: end,
+        ranges: {
+           'Today': [moment(), moment()],
+           'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+           'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+           'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+           'This Month': [moment().startOf('month'), moment().endOf('month')],
+           'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        }
+    }, cb);
+  
+    cb(start, end);
+  
+  });
+  </script>
+
+  <script>
+    function printpage() {
+      window.print();
+    }
+  </script>
 
 {% endblock content %}

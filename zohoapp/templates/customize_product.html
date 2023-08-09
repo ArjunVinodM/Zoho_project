@@ -97,48 +97,55 @@
 
 <script>
   $(document).ready(function () {
-
+  
     function addNewRow() {
       const newRow = `
       <div class="form-row pt-2">
-        <select name="" id="" style="width: 15vw;color: black; height: 5vh;">
-
+        <select name="" class="option-select" style="width: 15vw;color: black; height: 5vh;">
+          <option class="row d-flex justify-content-left mt-90" hidden>options</option>
           <option class="row d-flex justify-content-left mt-90" >item 1</option>
-          <option class="row d-flex justify-content-left mt-90" >item 2<option>
-  
-        </select>  &nbsp  &nbsp
-
+          <option class="row d-flex justify-content-left mt-90" >item 2</option>
+          <option class="row d-flex justify-content-left mt-90" >item 3</option>
+          <option class="row d-flex justify-content-left mt-90" >item 4</option>
+        </select>
+        &nbsp  &nbsp
         <select name="" id="" style="width: 15vw;color: black; height: 5vh;">
           <option value="" hidden>select</option>
           <option value="">is</option>
           <option value="">is not</option>
         </select> 
         &nbsp &nbsp
-        
-        <textarea name="narration" id="" cols="30" rows="2" style="height:5vh ;"></textarea>
+        <textarea name="fb_text" class="item-textarea" cols="30" rows="2" style="height:5vh; display:none;"></textarea>
         &nbsp&nbsp
         <div class="input-group-prepend">
-          <button class="btn btn-danger"
-            id="DeleteRow"
-            type="button">
+          <button class="btn btn-danger" id="DeleteRow" type="button">
             <i class="bi bi-trash"></i>  
           </button>
         </div>
       </div>
-
       `;
       $('#newinput').append(newRow);
     }
-
+  
     $('#rowAdder').on('click', function () {
       addNewRow();
     });
-
+  
     $(document).on('click', '#DeleteRow', function () {
       $(this).closest('.form-row').remove();
     });
+  
+    $(document).on('change', '.option-select', function () {
+      const selectedOption = $(this).val();
+      const textarea = $(this).closest('.form-row').find('.item-textarea');
+      if (selectedOption !== '') {
+        textarea.show();
+      } else {
+        textarea.hide();
+      }
+    });
   });
-</script>
+  </script>
 
 <script>
   $(function() {
