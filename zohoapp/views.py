@@ -7033,9 +7033,12 @@ def product_customize(request):
     general = "url1"
     show = "url2"
     
+    items = AddItem.objects.all()
+    
     context = {
         'url1' : general,
         'url2' : show,
+        'item' : items,
     }
     return render(request, 'customize_product.html', context)
 

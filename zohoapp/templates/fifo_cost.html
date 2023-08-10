@@ -111,7 +111,7 @@
   <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" style="background: white; color: black;">Export As</a>
     <ul class="dropdown-menu">
-      <li><a class="dropdown-item" href="#" style="font-size:10px;">PDF</a></li>
+      <li><a class="dropdown-item"  style="font-size:10px;" onclick="page()">PDF</a></li>
       <li><a class="dropdown-item" href="#" style="font-size:10px;">XLS (Microsoft Excel 1997-2004 Compatible)</a></li>
     </ul>
   </li>
@@ -120,12 +120,6 @@
     <button type="button" onclick="history.go(-1);" style="height:5vh; width:2.5vw;">&times;</button>
   </li>
 </ul>
-
-
-
-
-
-
 
 <div class="container-fluid"> 
   <div class="row pt-5 pb-5">
@@ -227,6 +221,71 @@
 </div>  
 
 
+<div id="pdfModal" class="modal" style="width: 70%; padding-left: 30%;">
+  <div class="modal-content">
+    <div class="modal-header" style="background-color: lightgray;margin-bottom:10% ;">
+     
+      <h2 style="color: black;font-size: larger;font-weight: bold;justify-content: right;">Export Report As PDF</h2>
+      <span class="close">&times;</span>
+    </div>
+    <div class="modal-body" >
+      <p  style="color: black;font-size: medium;">You can protect the export report with a password to keep your data secure</p>
+      <input type="checkbox" style="color: black;"><p style="color: black;font-size: medium;">I want to protect this file with password</p><br>
+      <a href="" onclick="page()">customize pdf</a>
+    </div>
+    <div class="modal-footer">
+      <button onclick="page()" id="button1">Export PDF</button>
+      <button id="button1">cancel</button>
+    </div>
+  </div>
+</div>
+
+<div id="xlsModal" class="modal"  style="width: 70%; padding-left: 30%;">
+  <div class="modal-content">
+    <div class="modal-header" style="background-color: lightgray;margin-bottom:10% ;">
+     
+      <h2 style="color: black;font-size: larger;font-weight: bold;justify-content: right;">Export Report as XLS (Microsoft Excel 1997-2004 Compatible)</h2>
+      <span class="close">&times;</span>
+    </div>
+    <div class="modal-body" >
+      <p  style="color: black;font-size: medium;">You can protect the export report with a password to keep your data secure</p>
+      <input type="checkbox" style="color: black;"><p style="color: black;font-size: medium;">I want to protect this file with password</p><br>
+      
+    </div>
+    <div class="modal-footer">
+      <button onclick="page()" id="button1">Export PDF</button>
+      <button id="button1">cancel</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+
+  $(document).ready(function() {
+      $("#exportDropdown").change(function() {
+          var selectedOption = $(this).val();
+          $(".modal").hide();
+          
+          if (selectedOption === "pdf") {
+              $("#pdfModal").show();
+          } 
+          else if(selectedOption === "xls")
+          {
+            $("#xlsModal").show();
+          }
+      });
+  
+      // Close modal when the close button is clicked
+      $(".close").click(function() {
+          $(this).closest(".modal").hide();
+      });
+  });
+  </script>
+
+
+
+
 <script>
   $(function() {
   
@@ -264,3 +323,8 @@
 
 
 {% endblock content %}
+
+
+
+
+

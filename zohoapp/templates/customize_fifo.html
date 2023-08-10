@@ -130,21 +130,11 @@
     </div><br>
     
     <label for="">Item Name</label>&nbsp;
-    <div class="dropdown">
-      <button onclick="myFunction()" class="dropbtn" style="text-align: center;">Dropdown</button>
-      <div id="myDropdown" class="dropdown-content">
-        <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
-        <ul class="dropdown-list">
-          <li><a href="#about">About</li>
-          <li><a href="#base">Base</a></li>
-          <li><a href="#blog">Blog</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li><a href="#custom">Custom</a></li>
-          <li><a href="#support">Support</a></li>
-          <li><a href="#tools">Tools</a></li>
-        </ul>
-      </div>
-    </div>
+      <select id="selectbox" style="width: 30%; height: 5vh;">
+        <option value="" disabled selected>Select...</option>
+        <option value="jquery">Item 6</option>
+        <option value="javascript">Item 7</option>
+      </select>
   </div>
 </div>
 
