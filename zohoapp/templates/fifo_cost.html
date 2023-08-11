@@ -5,6 +5,7 @@
 
 <style>
   table, th, td, tr {
+    color: white; 
     border: 1px solid white;
     border-collapse: collapse;
   }
@@ -34,7 +35,7 @@
     float: right;
   }
 
-  .dropdown, .nav-item {
+  .nav-item {
     float: left;
     color: #f2f2f2;
     text-align: center;
@@ -43,7 +44,20 @@
     font-size: 14px;
   }
 
+  .dropdown, .printdrop{
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 4px;
+    text-decoration: none;
+    font-size: 14px;
+  }
+
   .dropdown-item:hover{
+    color: white;
+  }
+
+  .printdrop:hover{
     color: white;
   }
 
@@ -59,6 +73,12 @@
     color: black;
   }
 
+  @media print {
+    table, th, td, tr {
+      border: 1px solid black; /* Ensure black borders when printing */
+    }
+  }
+
 
 </style>
 
@@ -71,23 +91,6 @@
   </li>
 
   <li>
-    {% comment %} <a href="#select" class="a">
-      <div>
-        <select id="demo_overview_minimal" data-role="select-dropdown" data-profile="minimal" style="height: 4vh; width:12vw;">
-          <option value="">Today</option>
-          <option value="">This Week</option>
-          <option value="">This Month</option>
-          <option value="">This Quarter</option>
-          <option value="">This Year</option>
-          <option value="">Yesterday</option>
-          <option value="">Previous Week</option>
-          <option value="">Previous Month</option>
-          <option value="">Previous Quarter</option>
-          <option value="">Previous Year</option>
-          <option value="">Custom</option>
-        </select>
-      </div>
-    </a> {% endcomment %}
     <div class="b text-black">
       <div id="reportrange" style="background: white; color: black; cursor: pointer; padding: 5px 10px; border: 1px solid black; height: 4vh; width: 19vw;">
         <i class="fa fa-calendar"></i>&nbsp;
@@ -97,37 +100,37 @@
   </li>
 
   <a href="{% url 'customize_fifo' %}"  class="customize me-auto">
-    <i class="fa fa-gear" style="font-size:18px;"></i>&nbsp&nbsp
+    <i class="fa fa-gear" style="font-size:18px;"></i>&nbsp;&nbsp;
     Customize report
   </a>
 
   <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" style="background: white; color: black;"><i class="fa fa-print"></i></a>
     <ul class="dropdown-menu">
-      <li><a class="dropdown-item" href="#" onclick="printpage()" style="font-size:10px;">Print Preference</a></li>
+      <li><a class="printdrop" href="#" onclick="printPageContent()" style="font-size:10px;">Print Preference</a></li>
     </ul>
   </li>
 
   <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" style="background: white; color: black;">Export As</a>
     <ul class="dropdown-menu">
-      <li><a class="dropdown-item"  style="font-size:10px;" onclick="page()">PDF</a></li>
-      <li><a class="dropdown-item" href="#" style="font-size:10px;">XLS (Microsoft Excel 1997-2004 Compatible)</a></li>
+      <li><a class="dropdown-item" style="font-size:10px;" onclick="exportAsPDF()">PDF</a></li>
+      <li><a class="dropdown-item" style="font-size:10px;" onclick="exportAsXLS()">XLS (Microsoft Excel 1997-2004 Compatible)</a></li>
     </ul>
-  </li>
+  </li> 
 
-  <li class="nav-item" style="height:4vh; width:4vw;">
+  <li class="nav-item" style="height:4vh; width:4vw; padding-top: 14px;">
     <button type="button" onclick="history.go(-1);" style="height:5vh; width:2.5vw;">&times;</button>
   </li>
 </ul>
 
-<div class="container-fluid"> 
+<div class="container-fluid" id="container-to-print"> 
   <div class="row pt-5 pb-5">
     <center>
       <div class="col-md-4">
-        <a class="text-white" style="font-size: 1rem;">Zoho Org</a><br>
-        <a class="text-white" style="font-size: 1.5rem;">FIFO Cost Lot Tracking </a><br>
-        <a class="text-white" style="font-size: 0.8rem;">From 01 Jan 2022 To 31 Dec 2022</a><br>
+        <a class="text" style="font-size: 1rem; color: white;">Zoho Org</a><br>
+        <a class="text" style="font-size: 1.5rem; color: white;">FIFO Cost Lot Tracking </a><br>
+        <a class="text" style="font-size: 0.8rem; color: white;">From 01 Jan 2022 To 31 Dec 2022</a><br>
       </div>
     </center>   
   </div> 
@@ -135,7 +138,7 @@
   <div style="overflow-x: auto; overflow-x: hidden;">
     <div class="row pt-2">
       <div class="col-sm-10 col-md-11 col-lg-12">
-        <table class="table text-white">
+        <table class="table">
           <thead>
             <tr>
               <th colspan="6" style="text-align: center;">PRODUCT IN</th>
@@ -158,17 +161,31 @@
 
           <tbody>
             <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td>02/03/2023</td>
+              <td>5000</td>
+              <td>AJ</td>
+              <td>Wood</td>
+              <td>5</td>
+              <td>5000</td>
 
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td> 
+              <td>02/03/2023</td>
+              <td>5000</td>
+              <td>AJ</td>
+              <td>5</td> 
+            </tr>
+
+            <tr>
+              <td>02/03/2023</td>
+              <td>5000</td>
+              <td>AJ</td>
+              <td>Wood</td>
+              <td>5</td>
+              <td>5000</td>
+
+              <td>02/03/2023</td>
+              <td>5000</td>
+              <td>AJ</td>
+              <td>5</td> 
             </tr>
 
             <tr>
@@ -221,69 +238,6 @@
 </div>  
 
 
-<div id="pdfModal" class="modal" style="width: 70%; padding-left: 30%;">
-  <div class="modal-content">
-    <div class="modal-header" style="background-color: lightgray;margin-bottom:10% ;">
-     
-      <h2 style="color: black;font-size: larger;font-weight: bold;justify-content: right;">Export Report As PDF</h2>
-      <span class="close">&times;</span>
-    </div>
-    <div class="modal-body" >
-      <p  style="color: black;font-size: medium;">You can protect the export report with a password to keep your data secure</p>
-      <input type="checkbox" style="color: black;"><p style="color: black;font-size: medium;">I want to protect this file with password</p><br>
-      <a href="" onclick="page()">customize pdf</a>
-    </div>
-    <div class="modal-footer">
-      <button onclick="page()" id="button1">Export PDF</button>
-      <button id="button1">cancel</button>
-    </div>
-  </div>
-</div>
-
-<div id="xlsModal" class="modal"  style="width: 70%; padding-left: 30%;">
-  <div class="modal-content">
-    <div class="modal-header" style="background-color: lightgray;margin-bottom:10% ;">
-     
-      <h2 style="color: black;font-size: larger;font-weight: bold;justify-content: right;">Export Report as XLS (Microsoft Excel 1997-2004 Compatible)</h2>
-      <span class="close">&times;</span>
-    </div>
-    <div class="modal-body" >
-      <p  style="color: black;font-size: medium;">You can protect the export report with a password to keep your data secure</p>
-      <input type="checkbox" style="color: black;"><p style="color: black;font-size: medium;">I want to protect this file with password</p><br>
-      
-    </div>
-    <div class="modal-footer">
-      <button onclick="page()" id="button1">Export PDF</button>
-      <button id="button1">cancel</button>
-    </div>
-  </div>
-</div>
-</div>
-
-<script>
-
-  $(document).ready(function() {
-      $("#exportDropdown").change(function() {
-          var selectedOption = $(this).val();
-          $(".modal").hide();
-          
-          if (selectedOption === "pdf") {
-              $("#pdfModal").show();
-          } 
-          else if(selectedOption === "xls")
-          {
-            $("#xlsModal").show();
-          }
-      });
-  
-      // Close modal when the close button is clicked
-      $(".close").click(function() {
-          $(this).closest(".modal").hide();
-      });
-  });
-  </script>
-
-
 
 
 <script>
@@ -314,15 +268,104 @@
   });
   </script>
 
+
   <script>
-    function printpage() {
-      window.print();
+    function printPageContent() {
+      const contentToPrint = document.getElementById('container-to-print');
+      const clonedContent = contentToPrint.cloneNode(true);
+
+      // Find all the elements with the class "text" within the cloned content
+      const textElements = clonedContent.querySelectorAll('.text');
+
+      // Set the text color to black for each element with the class "text"
+      textElements.forEach(element => {
+        element.style.color = '#000000';  // Text color (black)
+      });
+
+      // Set table styles to black
+      const tableElements = clonedContent.querySelectorAll('table, th, td, tr');
+      for (const element of tableElements) {
+      element.style.border = '1px solid black';
+      }
+  
+      // Print the cloned content
+      const printWindow = window.open('', '_blank');
+      printWindow.document.body.appendChild(clonedContent);
+      printWindow.print();
+      printWindow.close();
     }
+  </script>
+
+
+  <script>
+    function exportAsXLS() {
+        const data = [
+            ['DATE', 'TRANSACTIONS', 'RECEIVED FROM', 'ITEM NAME', 'QUANTITY', 'DATE', 'TRANSACTIONS', 'DISPERSED TO', 'QTY DISPERSED'],
+            ['Data 1', 'Data 2', 'Data 3', 'Data 4', 'Data 5', 'Data 6', 'Data 7', 'Data 8', 'Data 9'],
+            // Add more rows as needed
+        ];
+    
+        const ws = XLSX.utils.aoa_to_sheet(data);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+    
+        // Save the XLS file
+        XLSX.writeFile(wb, 'data.xlsx');
+    }
+    
+    function exportAsPDF() {
+      const container = document.getElementById('container-to-print');
+      
+      // Find all the elements with the class "text" within the container
+      const textWhiteElements = container.querySelectorAll('.text');
+      
+      // Set the text color for each element with the class "text" to black
+      textWhiteElements.forEach(element => {
+        element.style.color = '#000000';  // Text color (black)
+      });
+      
+      // Find all the specific elements within the container
+      const tableElements = container.querySelectorAll('table');
+      const tableCells = container.querySelectorAll('td, th');
+      const tableRows = container.querySelectorAll('tr');
+      
+      // Set the background color and text color for tables
+      tableElements.forEach(table => {
+        table.style.backgroundColor = '#ffffff';  // Background color (black)
+        table.style.color = '#000000';  // Text color (white)
+      });
+      
+      // Set the background color and text color for table cells (td and th)
+      tableCells.forEach(cell => {
+        cell.style.backgroundColor = '#ffffff';  // Background color (black)
+        cell.style.color = '#000000';  // Text color (white)
+      });
+
+      // Set the background color for table rows (tr)
+      tableRows.forEach(row => {
+        row.style.backgroundColor = '#000000';  // Background color (black)
+      });
+
+      const pdfOptions = {
+        margin: -1,
+        filename: 'journal.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'Landscape' },
+      };
+
+      // Generate PDF from the container
+      html2pdf().from(container).set(pdfOptions).save();
+    }
+    
   </script>
 
 
 
 {% endblock content %}
+
+
+
 
 
 

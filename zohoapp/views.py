@@ -7043,4 +7043,6 @@ def product_customize(request):
     return render(request, 'customize_product.html', context)
 
 def customize_fifo(request):
-    return render(request, 'customize_fifo.html')
+    items = AddItem.objects.all()
+    
+    return render(request, 'customize_fifo.html', {'item':items})

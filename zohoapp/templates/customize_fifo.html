@@ -132,8 +132,9 @@
     <label for="">Item Name</label>&nbsp;
       <select id="selectbox" style="width: 30%; height: 5vh;">
         <option value="" disabled selected>Select...</option>
-        <option value="jquery">Item 6</option>
-        <option value="javascript">Item 7</option>
+        {% for i in item %}
+        <option value="jquery">{{ i.Name }}</option>
+        {% endfor %}
       </select>
   </div>
 </div>
