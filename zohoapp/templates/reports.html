@@ -53,8 +53,8 @@
     
                         <a class="dropdown-item " href="#" style="font-size: medium;color: rgb(26, 25, 25);font-weight:500;">Inventory Summary</a>
                         <a class="dropdown-item " href="#" style="font-size: medium;color: rgb(26, 25, 25);font-weight:500;">Inventory Valuation Summary</a>
-                        <a class="dropdown-item " href="{% url 'fifo_cost' %}" style="font-size: medium;color: rgb(26, 25, 25);font-weight:500;">FIFO Cost Lot Tracking<span style="color: rgba(158, 156, 156, 0.932);display: none;">inventory</span></a>
-                        <a class="dropdown-item " href="{% url 'product_sales_report' %}" style="font-size: medium;color: rgb(26, 25, 25);font-weight:500;">Product Sales Report<span style="color: rgba(158, 156, 156, 0.932);display: none;">inventory</span></a>
+                        <li><a class="dropdown-item " href="{% url 'fifo_cost' %}" style="font-size: medium;color: rgb(26, 25, 25);font-weight:500;">FIFO Cost Lot Tracking<span style="color: rgba(158, 156, 156, 0.932);display: none;">inventory</span></a>
+                        <li></li><a class="dropdown-item " href="{% url 'product_sales_report' %}" style="font-size: medium;color: rgb(26, 25, 25);font-weight:500;">Product Sales Report<span style="color: rgba(158, 156, 156, 0.932);display: none;">inventory</span></a>
         
         
                     </li>
@@ -213,8 +213,8 @@
                 </h3></center>
                 <a id="a_over" href="#" class="ps-4" style="text-decoration: none;"> <img width="10" height="10" src="https://img.icons8.com/color/48/starburst-shape.png" alt="starburst-shape"/>&nbsp;&nbsp;&nbsp;Inventory Summary</a><br>
                 <a id="a_over" href="#" class="ps-4" style="text-decoration: none;"> <img width="10" height="10" src="https://img.icons8.com/color/48/starburst-shape.png" alt="starburst-shape"/>&nbsp;&nbsp;&nbsp;Inventory Valuation Summary</a><br>
-                <a id="a_over" href="#" class="ps-4" style="text-decoration: none;"> <img width="10" height="10" src="https://img.icons8.com/color/48/starburst-shape.png" alt="starburst-shape"/>&nbsp;&nbsp;&nbsp;FIFO Cost Lot Tracking</a><br>
-                <a id="a_over" href="#" class="ps-4" style="text-decoration: none;"> <img width="10" height="10" src="https://img.icons8.com/color/48/starburst-shape.png" alt="starburst-shape"/>&nbsp;&nbsp;&nbsp;Product Sales Report</a><br>
+                <a id="a_over" href="{% url 'fifo_cost' %}" class="ps-4" style="text-decoration: none;"> <img width="10" height="10" src="https://img.icons8.com/color/48/starburst-shape.png" alt="starburst-shape"/>&nbsp;&nbsp;&nbsp;FIFO Cost Lot Tracking</a><br>
+                <a id="a_over" href="{% url 'product_sales_report' %}" class="ps-4" style="text-decoration: none;"> <img width="10" height="10" src="https://img.icons8.com/color/48/starburst-shape.png" alt="starburst-shape"/>&nbsp;&nbsp;&nbsp;Product Sales Report</a><br>
             </div>
         </div>  
       </div>

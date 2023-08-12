@@ -7010,9 +7010,6 @@ def delete_payrollcomment(request,cid):
       
 # report
 
-def report(request):
-  return render(request, 'reports.html')
-
 def fifo_cost(request):
     return render(request, 'fifo_cost.html')
 

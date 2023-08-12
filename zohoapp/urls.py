@@ -162,7 +162,7 @@ urlpatterns = [
     path('itemdata_challan',views.itemdata_challan,name='itemdata_challan'),
     path('payment_term_for_sales',views.payment_term_for_sales,name="payment_term_for_sales"),
     
-    path('report_page/',views.report_page,name='report_page'),
+    path('report_page',views.report_page,name='report_page'),
     path('report_recurring_invoice/',views.report_recurring_invoice,name='report_recurring_invoice'),
     
     path('create_recur',views.create_recur,name='create_recur'),
@@ -335,7 +335,6 @@ urlpatterns = [
     path('add_payrollcomment/<int:pid>',views.add_payrollcomment,name='add_payrollcomment'),
     path('delete_payrollcomment/<int:cid>',views.delete_payrollcomment,name='delete_payrollcomment'),
     
-    path('report_page', views.report, name='report_page'),
     path('fifo_cost', views.fifo_cost, name='fifo_cost'),
     path('product_sales_report', views.product_sales, name='product_sales_report'),
     path('product_customize', views.product_customize, name='product_customize'),
@@ -343,9 +342,6 @@ urlpatterns = [
     
     path('url1', views.product_customize, name='url1'),
     path('url2', views.show_customize_product, name='url2'),
-
-    
-    re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
     
     
     
