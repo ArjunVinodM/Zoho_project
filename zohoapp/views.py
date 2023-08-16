@@ -7011,18 +7011,23 @@ def delete_payrollcomment(request,cid):
 # report
 
 def fifo_cost(request):
-    return render(request, 'fifo_cost.html')
+    company = company_details.objects.get(user = request.user)
+    return render(request, 'fifo_cost.html', {'company': company})
 
 def product_sales(request):
-    return render(request, 'product_sales.html')
+    company = company_details.objects.get(user = request.user)
+    return render(request, 'product_sales.html', {'company': company})
 
 def show_customize_product(request):
     general = "url1"
     show = "url2"
     
+    company = company_details.objects.get(user = request.user)
+    
     context = {
         'url1' : general,
         'url2' : show,
+        'company': company,
     }
     return render(request, 'customize_show_product.html', context)
 
@@ -7031,15 +7036,21 @@ def product_customize(request):
     show = "url2"
     
     items = AddItem.objects.all()
+    company = company_details.objects.get(user = request.user)
     
     context = {
         'url1' : general,
         'url2' : show,
         'item' : items,
+        'company': company,
     }
     return render(request, 'customize_product.html', context)
 
 def customize_fifo(request):
     items = AddItem.objects.all()
-    
-    return render(request, 'customize_fifo.html', {'item':items})
+    company = company_details.objects.get(user = request.user)
+    context = {
+        'item': items,
+        'company': company,
+        }
+    return render(request, 'customize_fifo.html', context)

@@ -2,11 +2,6 @@
 {% load static %}
 {% block content %}
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css">
-<script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
-<link rel="stylesheet"href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
 <style>
 
 .container-fluid {
@@ -35,103 +30,90 @@
   font-size: 14px;
 }
 
-.container2 {
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin-right:150% ;
+/* List group styling */
+
+.list-group-item:hover {
+  background-color: #f0f0f0;
 }
 
+/* Columns and items styling */
+.container-inner {
+  display: flex;
+  width: 45vw ;
+  padding-left: 40px;
+}
 
 .column {
-      flex: 1;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      vertical-align: top;
-  }
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 0 10px;
+  flex: 1;
+  height: 500px; 
+  overflow-y: auto;
+}
 
-  .search-bar {
-      margin-bottom: 10px;
-      position: relative;
-  }
+.column h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
 
-  .search-input {
-      padding: 5px 10px;
-      border: 1px solid #ccc;
-      border-radius: 3px;
-      width: 100%;
-  }
-
-  .search-icon {
-      position: absolute;
-      top: 50%;
-      right: 10px;
-      transform: translateY(-50%);
-      cursor: pointer;
-  }
-
-  h2{
-    white-space: nowrap;
-  }
-
-  .item-list {
-  display: inline-block;
-  align-items: center;
+.search-bar {
   position: relative;
-  white-space: nowrap; 
-  }
+}
 
-  .items.highlight {
-      background-color: #ffffe0;
-  }
+.search-input {
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  width: 100%;
+  margin-right: 10px;
+}
 
-  .items:hover .add,
-  .items:hover .remove {
-      display: inline-block;
-  }
+.search-icon {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
 
-  .add,
-  .remove {
-      cursor: pointer;
-      padding: 2px 4px;
-      border-radius: 5px;
-      display: none;
-  }
+.item-list {
+  list-style: none;
+  margin-top: 10px;
+}
 
-  .add {
-      background-color: #4caf50;
-      color: white;
-      margin-left: 10px;
-  }
+.items {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0;
+  border-bottom: 1px solid #eee;
+}
 
-  .remove {
-      background-color: #f44336;
-      color: white;
-  }
+.items:last-child {
+  border-bottom: none;
+}
 
-  .buttons {
-      display: flex;
-      justify-content: flex-end;
-      margin-top: 10px;
-  }
+.add,
+.remove {
+  color: black;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: none;
+}
 
-  .button {
-      margin-left: 10px;
-      padding: 5px 10px;
-      border: none;
-      border-radius: 3px;
-      cursor: pointer;
-  }
+.items:hover .add,
+.items:hover .remove {
+  display: inline-block;
+}
 
-  .report-button {
-      background-color: #f44336;
-      color: white;
-  }
-
-  .cancel-button {
-      background-color: #ccc;
-  }
+h2{
+  color: black;
+}
 
 </style>
 
@@ -161,35 +143,32 @@
     </div>
   </div>
   <div class="container-right">
-
-
-    <div class="container" id="container2">
-      <div class="row">
-        <div class="col-md-6" id="originalColumn" style="height: 70vh; width:25vw; overflow-y:auto; border: 1px solid #ccc; position: relative; padding-right: 15px;">
-          <h2 style="color: white; position: sticky; top: 0;">Available Column</h2>
-          <div class="search-bar" style="position: sticky; top: 40px;">
-            <input type="text" id="searchInput" class="search-input" placeholder="Search items">
-            <span class="search-icon">&#128269;</span>
-          </div>
-          <ul class="item-list" style="padding: 0; margin: 0; list-style: none;">
-            <li class="items"><span class="item-text">Item type</span> <span class="add">+</span></li>
-            <li class="items"><span class="item-text">Product type</span> <span class="add">+</span></li>
-            <li class="items"><span class="item-text">Status</span> <span class="add">+</span></li>
-            <li class="items"><span class="item-text">Usage Unit</span> <span class="add">+</span></li>
-            <li class="items"><span class="item-text">Sales Description</span> <span class="add">+</span></li>
-            <li class="items"><span class="item-text">Sales price</span> <span class="add">+</span></li>
-          </ul>
-        </div>&nbsp;
-        <div class="col-md-6" id="addedColumn" style="height: auto; max-height:70vh; width:25vw; overflow-y:auto ;border: 1px solid #ccc; padding-left: 15px;">
-          <h2 style="color: white; position: sticky; top:0;">Selected Column</h2>
-          <ul class="item-list" style="padding: 0; margin: 0; list-style: none;"></ul>
+    <div class="container-inner">
+      <div class="column" id="originalColumn">
+        <h2>Available Column</h2>
+        <div class="search-bar">
+          <i class=" search-icon fas fa-search" style="color: black;"></i>
+          <input type="text" id="searchInput" class="search-input" placeholder="Search items">
         </div>
+        <ul class="item-list text-black">
+          <li class="items"><span class="item-text">SKU</span> <span class="add">+</span></li>
+          <li class="items"><span class="item-text">Item type</span> <span class="add">+</span></li>
+          <li class="items"><span class="item-text">Product type</span> <span class="add">+</span></li>
+          <li class="items"><span class="item-text">Status</span> <span class="add">+</span></li>
+          <li class="items"><span class="item-text">Usage Unit</span> <span class="add">+</span></li>
+          <li class="items"><span class="item-text">Sales Description</span> <span class="add">+</span></li>
+          <li class="items"><span class="item-text">Sales price</span> <span class="add">+</span></li>
+          <li class="items"><span class="item-text">Created Time</span> <span class="add">+</span></li>
+          <li class="items"><span class="item-text">Last Modified Time</span> <span class="add">+</span></li>
+        </ul>
       </div>
-      <div class="buttons" style="position: sticky; bottom: 10px;">
-        <button class="button report-button">Report</button>
-        <button class="button cancel-button">Cancel</button>
-      </div>
-    </div>    
+      
+      <div class="column" id="addedColumn">
+        <h2>Selected Column</h2>
+        <ul class="item-list text-black">
+        </ul>
+      </div>  
+    </div>  
   </div>
 </div>
 
@@ -215,6 +194,23 @@
         removeButton.addEventListener("click", () => {
           selectedItems.removeChild(listItem);
           availableItems[index].style.display = "flex";
+        });
+      });
+    });
+
+    removeButtons.forEach((button, index) => {
+      button.addEventListener("click", () => {
+        const itemText = selectedItems[index].querySelector(".item-text").textContent;
+        const listItem = document.createElement("li");
+        listItem.className = "items";
+        listItem.innerHTML = `<span class="item-text">${itemText}</span> <span class="remove">-</span>`;
+        selectedItems.appendChild(listItem);
+        availableItems[index].style.display = "none";
+
+        const removeButton = listItem.querySelector(".remove");
+        addButton.addEventListener("click", () => {
+          availableItems.removeChild(listItem);
+          selectedItems[index].style.display = "flex";
         });
       });
     });

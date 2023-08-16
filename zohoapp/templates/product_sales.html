@@ -26,7 +26,7 @@
   .customize {
     float: left;
     text-align: center;
-    padding: 20px 330px;
+    padding: 20px 230px;
     text-decoration: none;
     font-size: 14px;
   }
@@ -64,6 +64,15 @@
     color: black;
   }
 
+  .daterangepicker td.available, .daterangepicker th {
+    color: black;
+  }
+
+  #reportrange span, #selectedEndDate, .daterangepicker .ranges ul li {
+    font-size: 14px; /* Adjust the font size as needed */
+  }
+
+
 </style>
 
 
@@ -76,7 +85,7 @@
 
   <li>
     <div class="b text-black">
-      <div id="reportrange" style="background: white; color: black; cursor: pointer; padding: 5px 10px; border: 1px solid black; height: 4vh; width: 19vw;">
+      <div id="reportrange" style="background: white; color: black; cursor: pointer; padding: 5px 10px; border: 1px solid black; height: 4vh; width: 12vw;">
         <i class="fa fa-calendar"></i>&nbsp;
         <span></span> <i class="fa fa-caret-down"></i>
       </div>
@@ -112,9 +121,13 @@
   <div class="row pt-5 pb-5">
     <center>
       <div class="col-md-4">
-        <a class="text" style="font-size: 1rem; color: white;">Zoho Org</a><br>
-        <a class="text" style="font-size: 1.5rem; color: white;">Product Sales Report </a><br>
-        <a class="text" style="font-size: 0.8rem; color: white;">From 01 Apr 2023 To 31 Mar 2023</a><br>
+
+        {% if company.company_name != None %}
+        <a class="text" style="font-size: 1rem; color: white;">{{ company.company_name }}</a><br>
+        {% else %}
+        <a class="text" style="font-size: 1rem; color: white;">Add Company</a><br>
+        {% endif %}        <a class="text" style="font-size: 1.5rem; color: white;">Product Sales Report </a><br>
+        <h5 class="text" id="selectedEndDate"></h5><br>      
       </div>
     </center>   
   </div> 
@@ -177,34 +190,53 @@
   <p>**Amount is displayed in your base currency INR</p>
 </div>  
 
-
 <script>
   $(function() {
-  
     var start = moment().subtract(29, 'days');
     var end = moment();
-  
-    function cb(start, end) {
-        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+
+    function cb(start, end, label) {
+      $('#reportrange span').text(label);
+      $('#selectedEndDate').text(start.format('MMMM D, YYYY')+'  to  '+end.format('MMMM D, YYYY'));
     }
-  
+
     $('#reportrange').daterangepicker({
-        startDate: start,
-        endDate: end,
-        ranges: {
-           'Today': [moment(), moment()],
-           'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-           'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-           'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-           'This Month': [moment().startOf('month'), moment().endOf('month')],
-           'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-        }
-    }, cb);
-  
-    cb(start, end);
-  
+      startDate: start,
+      endDate: end,
+      ranges: {
+        'Today': [moment(), moment()],
+        'This Week': [moment().startOf('week'), moment().endOf('week')],
+        'This Month': [moment().startOf('month'), moment().endOf('month')],
+        'This Quarter': [moment().startOf('quarter'), moment().endOf('quarter')],
+        'This Year': [moment().startOf('year'), moment().endOf('year')],
+        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+        'Previous Week': [moment().subtract(1, 'week').startOf('week'), moment().subtract(1, 'week').endOf('week')],
+        'Previous Quarter': [moment().subtract(1, 'quarter').startOf('quarter'), moment().subtract(1, 'quarter').endOf('quarter')],
+        'Previous Year': [moment().subtract(1, 'year').startOf('year'), moment().subtract(1, 'year').endOf('year')],
+      },
+      opens: 'left',
+      showCustomRangeLabel: true,
+      singleDatePicker: false,
+      showDropdowns: true,
+      alwaysShowCalendars: false,
+      linkedCalendars: true, // Set linkedCalendars to true
+    }, cb, function(start, end, label) {
+      if (label === 'Custom') {
+        // Show the calendar only when "Custom" range is selected
+        $(this.element).data('daterangepicker').show();
+      } else {
+        // Update the <h5> tag when a new date range is selected
+        $('#selectedEndDate').text(start.format('MMMM D, YYYY')+ '' +'to'+ '' +end.format('MMMM D, YYYY'));
+      }
+    });
+
+    $('.custom-caret i').click(function() {
+      $('#reportrange').data('daterangepicker').toggle();
+    });
+
+    cb(start, end, 'Today');
   });
-  </script>
+</script>
 
   <script>
     function printPageContent() {
@@ -246,52 +278,64 @@
           XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
       
           // Save the XLS file
-          XLSX.writeFile(wb, 'data.xlsx');
+          XLSX.writeFile(wb, '{{ company.company_name }}_Product_Sales_Report.xlsx');
       }
       
       function exportAsPDF() {
         const container = document.getElementById('container-to-print');
-        
-        // Find all the elements with the class "text" within the container
+      
+        // Save the original background color
+        const originalBackgroundColor = container.style.backgroundColor;
+      
+        // Set the container's background color to white
+        container.style.backgroundColor = 'white';
+      
+        // Apply styling changes to the container's content
         const textWhiteElements = container.querySelectorAll('.text');
-        
-        // Set the text color for each element with the class "text" to black
         textWhiteElements.forEach(element => {
-          element.style.color = '#000000';  // Text color (black)
+          element.style.color = '#000000'; // Set text color to black
         });
-        
-        // Find all the specific elements within the container
+      
         const tableElements = container.querySelectorAll('table');
         const tableCells = container.querySelectorAll('td, th');
         const tableRows = container.querySelectorAll('tr');
-        
-        // Set the background color and text color for tables
+      
         tableElements.forEach(table => {
-          table.style.backgroundColor = '#ffffff';  // Background color (black)
-          table.style.color = '#000000';  // Text color (white)
+          table.style.backgroundColor = '#ffffff'; // Set background color to white
+          table.style.color = '#000000'; // Set text color to black
         });
-        
-        // Set the background color and text color for table cells (td and th)
+      
         tableCells.forEach(cell => {
-          cell.style.backgroundColor = '#ffffff';  // Background color (black)
-          cell.style.color = '#000000';  // Text color (white)
+          cell.style.backgroundColor = '#ffffff'; // Set background color to white
+          cell.style.color = '#000000'; // Set text color to black
+          cell.style.border = '1px solid black'; // Add a black border
         });
-  
-        // Set the background color for table rows (tr)
+      
         tableRows.forEach(row => {
-          row.style.backgroundColor = '#000000';  // Background color (black)
+          row.style.backgroundColor = '#000000'; // Set background color to black
         });
-  
+      
         const pdfOptions = {
-          margin: -1,
-          filename: 'journal.pdf',
+          margin: 0,
+          filename: '{{company.company_name}}_Product_Sales_Report.pdf',
           image: { type: 'jpeg', quality: 0.98 },
           html2canvas: { scale: 2 },
-          jsPDF: { unit: 'mm', format: 'a4', orientation: 'Landscape' },
+          jsPDF: { unit: 'mm', format: 'a3', orientation: 'landscape' },
         };
-  
+      
         // Generate PDF from the container
-        html2pdf().from(container).set(pdfOptions).save();
+        html2pdf().from(container).set(pdfOptions).save().then(() => {
+  
+          // Restore the original background color
+          container.style.backgroundColor = originalBackgroundColor;
+  
+          textWhiteElements.forEach(element => {
+            element.style.color = 'white'; // Restore original text color
+  
+          // Remove the pdf-background class after generating the PDF
+          container.classList.remove('pdf-background');
+          });
+        });
       }
       
     </script>
