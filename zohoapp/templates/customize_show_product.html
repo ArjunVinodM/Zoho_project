@@ -166,6 +166,12 @@ h2{
       <div class="column" id="addedColumn">
         <h2>Selected Column</h2>
         <ul class="item-list text-black">
+          <li class="items"><span class="item-text">Item Name</span> <span class="remove">-</span></li>
+          <li class="items"><span class="item-text">Margin</span> <span class="remove">-</span></li>
+          <li class="items"><span class="item-text">Qty Sold</span> <span class="remove">-</span></li>
+          <li class="items"><span class="item-text">Sales Price</span> <span class="remove">-</span></li>
+          <li class="items"><span class="item-text">Sales With Tax</span> <span class="remove">-</span></li>
+          <li class="items"><span class="item-text">SKU(Item)</span> <span class="remove">-</span></li>
         </ul>
       </div>  
     </div>  
@@ -173,7 +179,147 @@ h2{
 </div>
 
 
+<!-- Your HTML code remains the same -->
+
 <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const originalAvailableItems = document.querySelectorAll("#originalColumn .items");
+    const originalAddButtons = document.querySelectorAll("#originalColumn .add");
+    const selectedItems = document.querySelector("#addedColumn .item-list");
+    const addedRemoveButtons = document.querySelectorAll("#addedColumn .remove");
+    const searchInput = document.getElementById("searchInput");
+    const searchIcon = document.querySelector(".search-icon");
+  
+    const itemIds = {}; // Map of item text to unique identifier
+  
+    originalAddButtons.forEach((button, index) => {
+      button.addEventListener("click", () => {
+        const itemText = originalAvailableItems[index].querySelector(".item-text").textContent;
+        const itemId = `selected-${itemText}`; // Unique identifier
+        itemIds[itemText] = itemId;
+        const listItem = document.createElement("li");
+        listItem.className = "items";
+        listItem.innerHTML = `<span class="item-text">${itemText}</span> <span class="remove">-</span>`;
+        listItem.setAttribute("data-item-id", itemId); // Set the unique identifier
+        selectedItems.appendChild(listItem);
+        originalAvailableItems[index].style.display = "none";
+  
+        const removeButton = listItem.querySelector(".remove");
+        removeButton.addEventListener("click", () => {
+          selectedItems.removeChild(listItem);
+          originalAvailableItems[index].style.display = "flex";
+        });
+      });
+    });
+  
+    addedRemoveButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const selectedItem = button.parentNode;
+        const itemText = selectedItem.querySelector(".item-text").textContent;
+        const itemId = itemIds[itemText]; // Get the unique identifier
+    
+        // Create a new list item for the available column
+        const listItem = document.createElement("li");
+        listItem.className = "items";
+        listItem.innerHTML = `<span class="item-text">${itemText}</span> <span class="add">+</span>`;
+        listItem.setAttribute("data-item-id", itemId); // Set the unique identifier
+        
+        // Insert the new item at the beginning of the available items
+        originalAvailableItems[0].parentNode.insertBefore(listItem, originalAvailableItems[0]);
+        
+        // Remove the selected item from the selected column
+        selectedItems.removeChild(selectedItem);
+    
+        const addButton = listItem.querySelector(".add");
+        addButton.addEventListener("click", () => {
+          // Logic when adding an item back to the selected column
+          // ...
+          
+          // Remove the item from the available column and show it in the selected column
+          listItem.parentNode.removeChild(listItem);
+          selectedItems.appendChild(selectedItem);
+        });
+      });
+    });
+  
+    searchIcon.addEventListener("click", () => {
+      const searchTerm = searchInput.value.toLowerCase();
+      originalAvailableItems.forEach(item => {
+        const itemText = item.querySelector(".item-text").textContent.toLowerCase();
+        if (itemText.includes(searchTerm)) {
+          item.style.display = "flex";
+          if (searchTerm !== "") {
+            item.classList.add("highlight");
+          } else {
+            item.classList.remove("highlight");
+          }
+        } else {
+          item.style.display = "none";
+          item.classList.remove("highlight");
+        }
+      });
+  
+      selectedItems.querySelectorAll(".items").forEach(item => {
+        const itemText = item.querySelector(".item-text").textContent.toLowerCase();
+        if (itemText.includes(searchTerm)) {
+          item.style.display = "flex";
+          if (searchTerm !== "") {
+            item.classList.add("highlight");
+          } else {
+            item.classList.remove("highlight");
+          }
+        } else {
+          item.style.display = "none";
+          item.classList.remove("highlight");
+        }
+      });
+    });
+  });    
+</script>
+
+
+
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} <script>
   document.addEventListener("DOMContentLoaded", () => {
     const availableItems = document.querySelectorAll("#originalColumn .items");
     const addButtons = document.querySelectorAll("#originalColumn .add");
@@ -189,7 +335,7 @@ h2{
         listItem.innerHTML = `<span class="item-text">${itemText}</span> <span class="remove">-</span>`;
         selectedItems.appendChild(listItem);
         availableItems[index].style.display = "none";
-
+  
         const removeButton = listItem.querySelector(".remove");
         removeButton.addEventListener("click", () => {
           selectedItems.removeChild(listItem);
@@ -197,23 +343,36 @@ h2{
         });
       });
     });
-
+  
+    const removeButtons = document.querySelectorAll("#addedColumn .remove");
     removeButtons.forEach((button, index) => {
       button.addEventListener("click", () => {
-        const itemText = selectedItems[index].querySelector(".item-text").textContent;
+        const selectedItem = selectedItems.children[index];
+        const itemText = selectedItem.querySelector(".item-text").textContent;
+
         const listItem = document.createElement("li");
         listItem.className = "items";
-        listItem.innerHTML = `<span class="item-text">${itemText}</span> <span class="remove">-</span>`;
-        selectedItems.appendChild(listItem);
-        availableItems[index].style.display = "none";
+        listItem.innerHTML = `<span class="item-text">${itemText}</span> <span class="add">+</span>`;
 
-        const removeButton = listItem.querySelector(".remove");
-        addButton.addEventListener("click", () => {
-          availableItems.removeChild(listItem);
-          selectedItems[index].style.display = "flex";
+        // Append the moved item to the top of the "Available Column" list
+        const firstAvailableItem = availableItems[0];
+        if (firstAvailableItem) {
+          firstAvailableItem.before(listItem);
+        } else {
+          availableItemsContainer.appendChild(listItem);
+        }
+
+        availableItems[index].style.display = "flex";
+
+        listItem.querySelector(".add").addEventListener("click", () => {
+          selectedItems.removeChild(listItem);
+          availableItems[index].style.display = "flex";
         });
+
+        selectedItems.removeChild(selectedItem);
       });
     });
+
 
     searchIcon.addEventListener("click", () => {
       const searchTerm = searchInput.value.toLowerCase();
@@ -233,6 +392,4 @@ h2{
       });
     });
   });
-</script>
-
-{% endblock content %}
+</script> {% endcomment %}

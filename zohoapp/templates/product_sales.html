@@ -197,7 +197,7 @@
 
     function cb(start, end, label) {
       $('#reportrange span').text(label);
-      $('#selectedEndDate').text(start.format('MMMM D, YYYY')+'  to  '+end.format('MMMM D, YYYY'));
+      $('#selectedEndDate').text('From ' +start.format('MMMM D, YYYY')+'  to  '+end.format('MMMM D, YYYY'));
     }
 
     $('#reportrange').daterangepicker({

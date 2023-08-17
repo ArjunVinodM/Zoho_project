@@ -257,7 +257,7 @@
 
     function cb(start, end, label) {
       $('#reportrange span').text(label);
-      $('#selectedEndDate').text(start.format('MMMM D, YYYY')+'  to  '+end.format('MMMM D, YYYY'));
+      $('#selectedEndDate').text('From ' +start.format('MMMM D, YYYY')+'  to  '+end.format('MMMM D, YYYY'));
     }
 
     $('#reportrange').daterangepicker({
@@ -286,7 +286,7 @@
         $(this.element).data('daterangepicker').show();
       } else {
         // Update the <h5> tag when a new date range is selected
-        $('#selectedEndDate').text(start.format('MMMM D, YYYY')+ '' +'to'+ '' +end.format('MMMM D, YYYY'));
+        $('#selectedEndDate').text('From'+ '' +start.format('MMMM D, YYYY')+ '' +'to'+ '' +end.format('MMMM D, YYYY'));
       }
     });
 
