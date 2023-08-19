@@ -344,6 +344,9 @@ urlpatterns = [
     path('url2', views.show_customize_product, name='url2'),
     
     
+    path('sales_order', views.sales_order, name='sales_order'),
+    
+    
     
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

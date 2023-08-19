@@ -387,10 +387,10 @@ def edit_profile(request,pk):
     
     return render(request,'edit_profile.html',context)
 
-# @login_required(login_url='login')
-# def itemview(request):
-#     viewitem=AddItem.objects.all()
-#     return render(request,'item_view.html',{'view':viewitem})
+@login_required(login_url='login')
+def itemview(request):
+    viewitem=AddItem.objects.all()
+    return render(request,'item_view.html',{'view':viewitem})
 
 
 @login_required(login_url='login')
@@ -7055,29 +7055,7 @@ def customize_fifo(request):
         }
     return render(request, 'customize_fifo.html', context)
 
+# 2
 
-
-
-@login_required(login_url='login')
-def itemview(request): 
-    viewitem=AddItem.objects.all()
-    return render(request,'item_view.html',{'view':viewitem})
-
-
-# def itemview(request):
-#     viewitem=AddItem.objects.all()
-#     status_filter = request.GET.get('status', 'active')  # Default to 'active'
-    
-#     if status_filter == 'active':
-#         items = AddItem.objects.filter(satus='active')
-#     elif status_filter == 'inactive':
-#         items = AddItem.objects.filter(satus='inactive')
-#     else:
-#         items = AddItem.objects.all()  # Handle other cases here if needed
-
-#     context = {
-#         'items': items,
-#         'view':viewitem,
-#     }
-
-#     return render(request, 'item_view.html', context)
+def sales_order(request):
+    return render(request, 'sales_order.html')
