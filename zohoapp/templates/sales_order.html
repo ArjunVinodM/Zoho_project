@@ -25,7 +25,7 @@
   .customize {
     float: left;
     text-align: center;
-    padding: 20px;
+    padding: 20px 130px;
     text-decoration: none;
     font-size: 14px;
   }
@@ -94,7 +94,7 @@
 
   <li>
     <div class="b text-black">
-      <div id="reportrange" style="background: white; color: black; cursor: pointer; padding: 5px 10px; border: 1px solid black; height: 4vh; width: 12vw;">
+      <div id="reportrange" style="background: white; color: black; cursor: pointer; padding: 5px 10px; border: 1px solid black; height: 5vh; width: 20vw;">
         <i class="fa fa-calendar"></i>&nbsp;
         <span></span> <i class="fa fa-caret-down"></i>
       </div>
@@ -103,7 +103,7 @@
 
   <a href="#"  class="customize me-auto"></a>
   
-  <li class="nav-item dropdown"  style="padding-left:50rem;">
+  <li class="nav-item dropdown"  style="padding-left:44rem;">
     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" style="background: white; color: black;"><i class="fa fa-file-excel"></i></a>
     <ul class="dropdown-menu">
       <li><a class="dropdown-item" style="font-size:10px;" onclick="exportAsPDF()">PDF</a></li>
@@ -125,6 +125,13 @@
 
 <div class="container-fluid" id="container-to-print"> 
 
+  <div class="row pt-5 pb-2">
+    <div class="col-md-4">
+      <a class="text" style="font-size: 1.5rem; color: white;"><b>Sales Order</b></a><br>
+    </div>
+  </div> 
+
+
   <div style="overflow-x: auto; overflow-x: hidden;">
     <div class="row pt-2">
       <div class="col-sm-10 col-md-11 col-lg-12">
@@ -144,71 +151,22 @@
           </thead>
 
           <tbody>
+            {% for d in data %}
             <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td>{{ d.sales_date }}</td>
+              <td>{{ d.sales_no }}</td>
+              <td>{{ d.customer.customerName }}</td>
+              <td>{{ d.ship_date }}</td>
+              <td>{{ d.status }}</td>
+              <td>{{ d.customer.customerType }}</td>
 
-              <td></td>
+              <td>{{ d.subtotal }}</td>
               <td></td>
               <td></td>
             </tr>
-
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
+            
           </tbody>
+          {% endfor %}
         </table>
       </div>
     </div>
@@ -221,8 +179,8 @@
       var end = moment();
 
       function cb(start, end, label) {
-        $('#reportrange span').text(label);
-        $('#selectedEndDate').text('From ' +start.format('MMMM D, YYYY')+'  to  '+end.format('MMMM D, YYYY'));
+        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+
       }
 
       $('#reportrange').daterangepicker({
@@ -259,7 +217,7 @@
         $('#reportrange').data('daterangepicker').toggle();
       });
 
-      cb(start, end, 'Today');
+      cb(start, end);
     });
   </script>
 

@@ -44,19 +44,19 @@
 </style>
 
 <section class="item" id="navbar-example2" >
-  <div class="container">
+  <div class="container" style="background: black; margin-left:-5rem;margin-top: 2rem; width:90%;">
     
       <div class="col-md-12" style="right:0;">
         <div class="row">
          
-          <div class="col-md-3" style="border-right: 1px solid white; height: 100vh; position: absolute; z-index:99; margin-top:-3rem;">
+          <div class="col-md-4" style="border-right: 1px solid white; height: 100vh; position: absolute; z-index:99; margin-top:-3rem;">
             <div class="row">
               <div class="col-md-4"><a class="text-white" style="font-size: 1.5rem;">All Items</a></div>
-              <div class="col-md-4 " style="margin-left: 9rem; margin-top: -1.8rem;">
-                <a style="color: black; margin-top: 3.1rem;" class="btn btn-secondary" href="{% url 'additem' %}">New</a>
-                <div class="col-md-4 form-inline" style="margin-left: 4rem; margin-top: -1.8rem;">
+              <div class="col-md-4 " style="margin-left: 22rem; margin-top: -1.9rem; ">
+                <a style="color: black; margin-top: 5rem; background: #FFCFB0;" class="btn btn-secondary" href="{% url 'additem' %}">New</a>
+                <div class="col-md-4 form-inline" style="margin-left: -6rem; margin-top: -1.8rem;">
                   <div class="btn-group">
-                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" Style="background: #FFCFB0;">
                       Filter
                     </button>
                     <div class="dropdown-menu" aria-labelledby="filterButton">
@@ -68,7 +68,7 @@
                 </div>
               </div>
             </div>
-            <input type="text" id="searchInput" class="form-control bg-dark" placeholder="Search Items..." style="margin-top: -2rem; width: 45%; margin-left: -3rem;">
+            <input type="text" id="searchInput" class="form-control bg-dark" placeholder="Search Items..." style="margin-top: -2.2rem; width: 50%; margin-left: 1rem;">
             <div id="tableContainer" style="max-height: 500px;overflow-y: auto;margin-top:2rem;">
               <table class="table text-white" style="margin-top: 4rem;" id="dataTable">
                 <thead>
@@ -98,35 +98,50 @@
           </div>
           
           
-          <div class="col-md-12 " style="margin-left: 22rem;"  data-spy="scroll" data-target="#navbar-example2" data-offset="0">
+          <div class="col-md-12" style="margin-left: 28rem;"  data-spy="scroll" data-target="#navbar-example2" data-offset="0">
             <div class="row" style="position: relative;z-index:99">
-              <div class="col-md-12" ><a class="text-white" style="font-size: 1.5rem;position: relative;"><h2>{{product.Name}}</h2></a>
+              <div class="col-md-12" >
+                <a class="text-white" style="font-size: 1.5rem; margin-left:4rem;"><h3>{{product.Name}}</h3></a>
                 {%  if product.satus == 'active' %}
                 <button class="btn btn-dark text-white mt-2" style="border: 2px solid green;"  >{{product.satus}}</button>
                 {% else %}
                   <button class="btn btn-dark text-white mt-3" style="border: 2px solid red;"  >{{product.satus}}</button>
-                {% endif %}</div>
+                {% endif %}
+              </div>
+              <div class="col-md-4 " style="margin-top: 1rem; z-index:9; ">
+                <a href="{% url 'transaction' product.id %}" style= "font-size: 18px;margin-left: -0.1rem; width: 8.5rem; height: 2rem; background: #FFCFB0;"  class="btn btn-secondary  text-dark " >
+                  Transactions
+                </a>
+              </div>
                 <div class="container">
                   <div class="row">
               
                     <div class="col-md-6" style="margin-top: 2rem;">
-                      <a style="color: #e0e0e0; width: 4rem; height: 2rem; margin-top: 1rem; margin-left: 80%;" class="btn btn-secondary text-dark" onclick="location.href ='{% url 'edititem' product.id %}'">
+                      <a style="color: #e0e0e0; width: 3rem; height: 2rem; margin-top: 2.3rem; margin-left: 95%; background: #FFCFB0;" class="btn btn-secondary text-dark" onclick="location.href ='{% url 'edititem' product.id %}'">
                         <i class="fa fa-solid fa-pencil "></i>
                       </a>
                     </div>
                     </div>      
                     
-                    <div class="col-md-4 " style="margin-top:-2rem;position: relative;z-index:9;">
+                    <div class="col-md-4 " style="margin-top:-2rem;position: relative;z-index:9; ">
                       <input type="file" id="attachment" style="display: none;">
-                      <button onclick="document.getElementById('attachment').click();" id="comment-box" style= "font-size: 18px;margin-left: 34rem"  class="btn btn-secondary text-dark"> File</button>
-                      <a href="{% url 'cleer' product.id %}" style="color: #ccc;height: 2rem;margin-top: -3.6rem;margin-left: 39rem;font-size: 18px"  class="btn btn-secondary  text-dark " >Delete</a>
+                      <button onclick="document.getElementById('attachment').click();" id="comment-box" style= "font-size: 18px;margin-left: 40.2rem; width: 3rem; height: 2rem; background: #FFCFB0;"  class="btn btn-secondary text-dark">
+                        <i class="fa fa-solid fa-file"></i>
+                      </button>
+                      <a href="{% url 'cleer' product.id %}" style="color: #ccc;height: 2rem;margin-top: -3.7rem;margin-left: 43.8rem; font-size: 18px; background: #FFCFB0;"  class="btn btn-secondary  text-dark " >
+                        <i class="fa fa-solid fa-trash"></i>
+                      </a>
                     </div>
                   
                       <div class="toggle2">
-                        <button onclick="toggleModal()" style="margin-top: -6.5rem; font-size: 18px; margin-left: 45rem;" class="btn btn-secondary text-dark">Comments</button>
+                        <button onclick="toggleModal()" style="margin-top: -6.7rem; font-size: 18px; margin-left: 47.2rem; background: #FFCFB0;" class="btn btn-secondary text-dark">
+                          <i class="fa fa-solid fa-comment"></i>
+                        </button>
                       </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </div>
                   </div>
+
+                  <hr>
 
               
                 <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
@@ -177,49 +192,63 @@
                         
                              
                   </div>
-                  <div class="col-sm-12"> 
-                    <div class="card" style="margin-top:30px;">
+                  <div class="col-sm-8"> 
+                    <div class="card text-black" style="margin-top:30px; margin-right:5px; background: #FFE7C7;">
                       <div class="card-body">
-                        <h5 class="mr-5">Account Type</h5>
-                        <h6 style="margin-top: -1.6rem; margin-left: 13rem;" >{{product.type}}</h6> 
+                        <h2 class="text-center" style="margin-top: 5rem;" >{{product.Name}}&nbsp;DETAILS</h2> <hr>
+
+                        <h6 style="margin-top: -7.9rem;margin-left: 35rem;">HSN Code :</h6>
+                        <h6 style="margin-top: -1.6rem; margin-left: 45rem; margin-bottom: 2rem;"  >{{product.hsn}}</h6> 
+
+                        <h6 style="margin-top: -1.6rem;margin-left: 35rem;">Stock on Inventory :</h6>
+                        <h6 style="margin-top: -1.6rem; margin-left: 45rem; margin-bottom: 2rem;"  >{{product.stock}}</h6> 
+
+                        <h6 style="margin-top: -5rem;"><b>Cost price :</b></h6> <br>
+                        <h6 style="margin-top: -3.1rem; margin-left: 7.5rem;" ><b>{{product.p_price}}</b></h6> <br>
+
+                        <h6 style="margin-top: -1.5rem;"><b>Selling  price :</b></h6> <br>
+                        <h6 style="margin-top: -3.1rem; margin-left: 7.5rem;" ><b>{{product.s_price}}</b></h6> <br>
+
+                        <h5 style="margin-top: 5rem;">Account Type :</h5>
+                        <h6 style="margin-top: -1.6rem; margin-left: 13rem; margin-bottom: 2rem;" >{{product.type}}</h6> 
                     
-                        <h5 class="mr-5">Unit</h5>
-                        <h6 style="margin-top: -1.6rem; margin-left: 13rem;" >{{product.unit.unit}}</h6> 
+                        <h5 class="mr-5">Unit :</h5>
+                        <h6 style="margin-top: -1.6rem; margin-left: 13rem; margin-bottom: 2rem;" >{{product.unit.unit}}</h6> 
                     
-                        <h6 class="mr-4 ">Created Source</h6>
+                        <h6 class="mr-4 ">Created Source :</h6>
                         <h6 style="margin-top: -1.6rem; margin-left: 13rem; margin-bottom: 2rem;"  >{{product.user.username}}</h6> 
-                        <h6 class="mr-4 ">HSN Code</h6>
-                        <h6 style="margin-top: -1.6rem; margin-left: 13rem; margin-bottom: 2rem;"  >{{product.hsn}}</h6> 
-                        <h6 class="mr-4 ">Tax Prefrence</h6>
+
+                        <h6 class="mr-4 ">Tax Prefrence :</h6>
                         <h6 style="margin-top: -1.6rem; margin-left: 13rem; margin-bottom: 2rem;"  >{{product.tax}}</h6> 
-                        <h6 class="mr-4 ">Stock on Inventory</h6>
+
+                        <h6 class="mr-4 ">Stock on Inventory :</h6>
                         <h6 style="margin-top: -1.6rem; margin-left: 13rem; margin-bottom: 2rem;"  >{{product.stock}}</h6> 
-                        <h6 class="mr-5">Cost price</h6> <br>
-                        <h6 style="margin-top: -2.7rem; margin-left: 13rem;" >{{product.p_price}}</h6> <br>
+
+
                         <h6 class="mr-5">Purchase Account :</h6>
                         <h6 style="margin-top: -1.5rem; margin-left: 13rem;" >{{product.purchase.Account_name}}</h6> <br>
-                        <h6 class="mr-5">Selling  price</h6> <br>
-                        <h6 style="margin-top: -3rem; margin-left: 13rem;" >{{product.s_price}}</h6> <br>
-                        <h6 class="mr-5">Sales  Account</h6>
+
+                        <h6 class="mr-5">Sales  Account :</h6>
                         <h6 style="margin-top: -1.6rem; margin-left: 13rem;" >{{product.sales.Account_name}}</h6> <br>
                         
                       </div>
                     
                     <div> 
-                      <div class="card" style="margin-left:500px;width:350px;height:400px;margin-top:-28rem; background-color:white;">
-                        <div class="card-body" style="color:black">
-                          <h6 class="mr-5">Name  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h6>
-                          <h6 style="margin-top: -1.6rem; margin-left: 12rem;" >{{product.Name}}</h6> <br>
+                      <div class="card" style="margin-left:500px;width:350px;height:400px;margin-top:-25rem; background-color:#C88141;">
+                        <div class="card-body" style="color:White;">
+                          <h4>PURCHASE DETAILS</h4>
+                          <hr>
                           <h6 class="mr-5">Purchase Account &nbsp;&nbsp;&nbsp;&nbsp; </h6>
                           <h6 style="margin-top: -1.6rem; margin-left: 12rem;" >{{product.purchase.Account_name}}</h6> <br>
                           <h6 class="mr-5">Description &nbsp;&nbsp;&nbsp;&nbsp; </h6>
                           <h6 style="margin-top: -1.6rem; margin-left: 12rem;" >{{product.p_desc}}</h6> <br>
+                          <h4>SALES DETAILS</h4><hr>
                           <h6 class="mr-5">Sales  Account</h6>
                           <h6 style="margin-top: -1.6rem; margin-left: 12rem;" >{{product.sales.Account_name}}</h6> <br>
                           <h6 class="mr-5">Description</h6>
                           <h6 style="margin-top: -1.6rem; margin-left: 12rem;" >{{product.s_desc}}</h6>
-                          <h6 class="mr-5 " style="margin-top: 2rem;">Stock on Inventory</h6>
-                          <h6 style="margin-top: -1.4rem; margin-left: 13rem; "  >{{product.stock}}</h6>
+                          {% comment %} <h6 class="mr-5 " style="margin-top: 2rem;">Stock on Inventory</h6>
+                          <h6 style="margin-top: -1.4rem; margin-left: 13rem; "  >{{product.stock}}</h6> {% endcomment %}
                         </div>
                       </div>
                     </div>
@@ -406,12 +435,11 @@
   
   
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
-   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-  </section>
+</section>
 {% endblock %}
- 

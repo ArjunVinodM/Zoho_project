@@ -345,6 +345,8 @@ urlpatterns = [
     
     
     path('sales_order', views.sales_order, name='sales_order'),
+    path('sales_summery', views.sales_summery, name='sales_summery'),
+    path('transaction/<int:pk>', views.transaction, name="transaction"),
     
     
     

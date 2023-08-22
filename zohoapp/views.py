@@ -7058,4 +7058,24 @@ def customize_fifo(request):
 # 2
 
 def sales_order(request):
-    return render(request, 'sales_order.html')
+    data = SalesOrder.objects.all()
+    return render(request, 'sales_order.html', {'data':data})
+
+def sales_summery(request):
+    data = AddItem.objects.all()
+    
+    return render(request, 'sales_summery.html', {'data':data})
+
+def transaction(request, pk):
+    product = AddItem.objects.get(id = pk)
+    
+    items=AddItem.objects.all()
+    estimate = EstimateItems.objects.all()
+    
+    context = {
+        'allproduct': items,
+        'product': product,
+        'estimate': estimate,
+    }
+    
+    return render(request, 'transactions.html', context)
