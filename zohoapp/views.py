@@ -7070,12 +7070,23 @@ def transaction(request, pk):
     product = AddItem.objects.get(id = pk)
     
     items=AddItem.objects.all()
-    estimate = EstimateItems.objects.all()
+    
+    estimate = EstimateItems.objects.filter(item_name = product.Name)
+    sales_order = sales_item.objects.filter(product = product.Name)
+    recurring_invoice = recur_itemtable.objects.filter(iname = product.Name)
+    purchase_order = Purchase_Order_items.objects.filter(item = product.Name)
+    recurring_bills = recurring_bills_items.objects.filter(item = product.Name)
+    
     
     context = {
         'allproduct': items,
         'product': product,
+        
         'estimate': estimate,
+        'sales_order': sales_order,
+        'recurring_invoice': recurring_invoice,
+        'purchase_order': purchase_order,
+        'recurring_bills': recurring_bills,
     }
     
     return render(request, 'transactions.html', context)

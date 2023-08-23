@@ -65,10 +65,9 @@
               <tbody id="tableBody">
                 {% for v in allproduct %}
                 <tr>
-                  <td><a class="text-white" href="{% url 'detail' v.id %}">{{v.Name}}</a></td>
-                  <td><a class="text-white" href="#"></a></td>
+                  <td><a class="text-white" href="{% url 'detail' v.id %}">{{ v.Name }}</a></td>
+                  <td><a class="text-white" href="#">{{ v.stock }}</a></td>
                 </tr>
-            
                 {% endfor %}
               </tbody>
             </table>
@@ -83,20 +82,20 @@
               <div class="row">
                 <div class="col">
                   <a class="" style="font-size: 1.5rem; margin-left:4rem; margin-top: -2rem; color: #FFCFB0;">
-                    <h3>{{product.Name}}</h3>
+                    <h3>{{ product.Name }}</h3>
                   </a>
 
                   <p style="margin-top: 1.5rem; color: #FFCFB0;">SALE PRICE :</p>
-                  <p style="margin-top: -2.2rem; margin-left: 8rem; color: #01F9C6;">{{product.s_price}}(incl)</p> 
+                  <p style="margin-top: -2.2rem; margin-left: 8rem; color: #01F9C6;">{{ product.s_price }}(incl)</p> 
 
                   <p style="margin-top: -1rem; color: #FFCFB0;">PURCHASE PRICE :</p>
-                  <p style="margin-top: -2.3rem; margin-left: 8rem; color: #01F9C6;">{{product.p_price}}(excl)</p> 
+                  <p style="margin-top: -2.3rem; margin-left: 8rem; color: #01F9C6;">{{ product.p_price }}(excl)</p> 
 
                   <p style="margin-top: -3.9rem; margin-left: 42rem; color: #FFCFB0;">STOCK QUANTITY :</p>
-                  <p style="margin-top: -2.2rem; margin-left: 50rem; color: #01F9C6;">{{product.hsn}}</p> 
+                  <p style="margin-top: -2.2rem; margin-left: 50rem; color: #01F9C6;">{{ product.stock }}</p> 
 
                   <p style="margin-top: -1rem; margin-left: 42rem; color: #FFCFB0;">STOCK VALUE :</p>
-                  <p style="margin-top: -2.3rem; margin-left: 50rem; color: #01F9C6;">{{product.hsn}}</p> 
+                  <p style="margin-top: -2.3rem; margin-left: 50rem; color: #01F9C6;">{{product.hsn}}</p>
                 </div>
               </div>      
             </div>
@@ -117,15 +116,58 @@
               <tbody id="tableBody">
                 {% for v in estimate %}
                 <tr>
-                  <td>{{ v.}}</td>
+                  <td>Estimate</td>
                   <td>{{ v.estimate.customer_name }}</td>
                   <td>{{ v.estimate.estimate_date }}</td>
                   <td>{{ v.quantity }}</td>
                   <td>{{ v.rate }}</td>
-                  <td>{{ v.}}</td>
-                </tr>
-            
+                  <td>{{ v.estimate.status}}</td>
                 {% endfor %}
+                </tr>
+
+                {% for s in sales_order %}
+                <tr>
+                  <td>Sales Order</td>
+                  <td>{{ s.sale.s_person }}</td>
+                  <td>{{ s.sale.sales_date }}</td>
+                  <td>{{ s.quantity }}</td>
+                  <td>{{ s.rate }}</td>
+                  <td>{{ s.sale.status}}</td>
+                {% endfor %}
+                </tr>
+                
+                {% for r in recurring_invoice %}
+                <tr>
+                  <td>Recurring Invoice</td>
+                  <td>{{ r.ri.cname }}</td>
+                  <td>{{ r.ri.start }}</td>
+                  <td>{{ r.quantity }}</td>
+                  <td>{{ r.rate }}</td>
+                  <td></td>
+                {% endfor %}
+                </tr>
+
+                {% for p in purchase_order %}
+                <tr>
+                  <td>Purchase Order</td>
+                  <td>{{ p.PO.customer_name }}</td>
+                  <td>{{ p.PO.Ord_date }}</td>
+                  <td>{{ p.quantity }}</td>
+                  <td>{{ p.rate }}</td>
+                  <td>{{ p.PO.status }}</td>
+                {% endfor %}
+                </tr>
+
+                {% for r in recurring_bills %}
+                <tr>
+                  <td>Recurring Bills</td>
+                  <td>{{ r.recur_bills.customer_name }}</td>
+                  <td>{{ r.recur_bills.start_date }}</td>
+                  <td>{{ r.quantity }}</td>
+                  <td>{{ r.rate }}</td>
+                  <td></td>
+                {% endfor %}
+                </tr>
               </tbody>
             </table>
           </div>           

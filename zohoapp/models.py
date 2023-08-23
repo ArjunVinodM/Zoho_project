@@ -722,6 +722,7 @@ class Payroll(models.Model):
     status=models.CharField(max_length=200,default='Active')
     isTDS=models.CharField(max_length=200,null=True)
     TDS = models.IntegerField(null=True,default=0)
+    
 class Bankdetails(models.Model):
     acc_no = models.IntegerField()   
     IFSC = models.CharField(max_length=100)
@@ -729,9 +730,11 @@ class Bankdetails(models.Model):
     branch = models.CharField(max_length=100)
     transaction_type = models.CharField(max_length=100)
     payroll=models.ForeignKey(Payroll,on_delete=models.CASCADE,default='')
+    
 class Commentmodel(models.Model):
     comment=models.CharField(max_length=300)
     payroll=models.ForeignKey(Payroll,on_delete=models.CASCADE)
+    
 class Payrollfiles(models.Model):
     attachment=models.FileField(upload_to='doc/',null=True)
     payroll=models.ForeignKey(Payroll,on_delete=models.CASCADE)
